@@ -526,18 +526,10 @@ function display_providers_func( $atts ) {
         $imgInfo = wp_get_attachment_image_src($thumbnailId);
         $postCount++;
         
-        if ($postCount === 1) {
-            echo '<table><tr>';
-        }
-        
-        echo '<td><img src=' . $imgInfo[0] . '></img></td>';
-        
-        if ($postCount === $postsInCat) {
-                echo '</tr></table>';
-            }
+        echo '<div class="provider"><img src=' . $imgInfo[0] . '></img></div>';
         
         if ($postCount != 1 && $postCount % 3 === 0 && $postCount != $postsInCat) {
-            echo '</tr><tr>';
+            echo '<br>';
         }
     }
 }
