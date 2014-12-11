@@ -515,19 +515,25 @@ if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow
 }
 
 function display_providers_func( $atts ) {
-    
+    /* the $postCoutn variable, initialized as the Loop begins, is made accessible here */
     global $postCount;
     
+    /* getting the post count in 'Providers gives us a cap for when to stop echoing '<br>' below' */
     $postsInCat = get_term_by('name','Provider','category');
     $postsInCat = $postsInCat->count;
     
     if (in_category('Provider')) {
+        
+        /* as of right now, only the Provider post's image needs to be retrieved */
         $thumbnailId = get_post_thumbnail_id();
         $imgInfo = wp_get_attachment_image_src($thumbnailId);
+        /* we use $postCount to tell us where to display the image, in a new "row" or not*/
         $postCount++;
         
+        /* generates image-containing div. Note that $imgInfo is actually an array as per the WP method */
         echo '<div class="provider"><img src=' . $imgInfo[0] . '></img></div>';
         
+        /* when this isn't the first post, and it is the last past in a row, and not the last post period, it's         time to start a new row, hence the <br> break */
         if ($postCount != 1 && $postCount % 3 === 0 && $postCount != $postsInCat) {
             echo '<br>';
         }
@@ -535,44 +541,3 @@ function display_providers_func( $atts ) {
 }
         
 add_shortcode( 'display_providers', 'display_providers_func' );
-
-/* if ($postCount === 3) {
-            // if this is not first post, you need to close the previous row (</tr>)
-            if ($postCount != 0) {
-                echo '</tr>';
-            }
-            echo '<tr>';
-        }
-        $postCount = $postCount + 1;
-        echo $postCount;
-        /* $opener = "?> <img src=";
-        $closer = "> <?php"; */
-        /* $finalImage = $imgInfo;
-        /* $toBeImploded = ["<img src=", $imgInfo, ">"];
-        $toBeReturned = implode($toBeImploded); */
-        /* $string = serialize($toBeImploded); */
-        /* return $finalImage;
-        /* return "<img src="' . $imgInfo['src'] . '" class="bgImage thumbnail" title="' . $imgInfo['alt'] . '">"; */
-    /* } */
-
-/* if ($postCount === 1) {
-            echo '<table><tr><td>';
-            echo '<img src=' . $imgInfo[0] . '></img>';
-            echo '</td>';
-        } elseif ($postCount != 1 && $postCount % 3 === 0) {
-            echo '<td>';
-            echo '<img src=' . $imgInfo[0] . '></img>';
-            echo '</td></tr><tr>';
-            if ($postCount === $postsInCat) {
-                echo '</table>';
-            }
-        } elseif ($postCount === $postsInCat) {
-            echo '<td>';
-            echo '<img src=' . $imgInfo[0] . '></img>';
-            echo '</td></tr></table>';
-        }
-        else {
-            echo '<td>';
-            echo '<img src=' . $imgInfo[0] . '></img>';
-            echo '</td>';
-        } */

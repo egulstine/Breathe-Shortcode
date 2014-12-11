@@ -35,25 +35,6 @@ get_header(); ?>
 				while ( have_posts() ) : the_post();
 	
                     do_shortcode( '[display_providers]' );
-                     /* image=$imgInfo currentPost=$postCount */
-
-
-                    /* if (in_category('Provider')) {
-    if ($postCount === 3) {
-        // if this is not first post, you need to close the previous row (</tr>)
-        if ($postCount != 0) {
-            echo '</tr>';
-        }
-        echo '<tr>';
-        }
-    ?>
-        <?php
-            $postCount = $postCount + 1;
-        return "?> <td>
-            <?php the_post_thumbnail(); ?>
-        </td> <?php";
-        } */
-
 
 
 					/*
@@ -62,7 +43,7 @@ get_header(); ?>
 					 * (where ___ is the post format) and that will be used instead.
 					 */
 					// !! get_template_part( 'content', get_post_format() );
-// Evan says: commenting out the above line eliminated the default post displays, but still allowed the table to generate
+
 				endwhile; 
 				// Previous/next post navigation.
 				twentyfourteen_paging_nav(); 
